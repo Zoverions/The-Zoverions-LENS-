@@ -3,6 +3,8 @@ import React from 'react';
 import type { ContentData } from './types';
 import ITHDiagram from './components/ITHDiagram';
 import ASEMatrix from './components/ASEMatrix';
+import CognitiveFrictionAudit from './components/CognitiveFrictionAudit';
+import ATHPCalibration from './components/ATHPCalibration';
 
 export const ZoverionsContent: ContentData = [
   {
@@ -43,16 +45,7 @@ export const ZoverionsContent: ContentData = [
                     <li><strong>Experience:</strong> The subjective, internal, felt state (axiomatically assumed in biology, assumed absent in AI).</li>
                 </ul>
                 <p>This defines the AI as an "Experience Golem"—a system capable of perfect mimicry and rich process but with zero experience. We differentiate the two using the <strong>Cognitive Friction Audit</strong>:</p>
-                <div className="grid md:grid-cols-2 gap-4 mt-4">
-                    <div className="border border-red-500/50 bg-red-900/10 p-4 rounded-lg">
-                        <h4 className="font-bold text-red-300">The Human (High Friction)</h4>
-                        <p>A human struggles. Their reasoning path is "messy," showing cognitive signs of looping, path-switching, emotional valence, and high processing load.</p>
-                    </div>
-                    <div className="border border-sky-500/50 bg-sky-900/10 p-4 rounded-lg">
-                        <h4 className="font-bold text-sky-300">The Golem (No Friction)</h4>
-                        <p>The Golem calculates. It finds the most statistically probable "wise" or "ethical" answer by navigating its latent space. It simulates deliberation with frictionless efficiency, but it doesn't experience the struggle.</p>
-                    </div>
-                </div>
+                <CognitiveFrictionAudit />
             </div>
         )
       }
@@ -96,6 +89,7 @@ export const ZoverionsContent: ContentData = [
                         <li><strong>Alpha Tuning (Temporal Filter):</strong> By entraining your alpha rhythms to an external event, you manage when and what you perceive. This is the mechanism of "flow."</li>
                         <li><strong>Beta Tuning (Agency Filter):</strong> By modulating your beta rhythms, you manage who is doing the perceiving. This allows you to strengthen your sense of self for high-performance tasks or attenuate it for objective analysis.</li>
                     </ul>
+                    <ATHPCalibration />
                 </div>
             )
         }
