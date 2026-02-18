@@ -1,5 +1,6 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import ReactMarkdown from 'react-markdown';
 import type { ChatMessage } from '../types';
 import { askAI } from '../services/geminiService';
 
@@ -65,7 +66,9 @@ const Chatbot: React.FC = () => {
                             <div key={index} className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
                                 {msg.role === 'model' && <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-600 to-blue-700 flex-shrink-0"></div>}
                                 <div className={`max-w-[80%] rounded-lg p-3 text-sm ${msg.role === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-800 text-gray-300'}`}>
-                                    <div className="prose prose-invert prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: msg.text.replace(/\n/g, '<br/>') }} />
+                                    <div className="prose prose-invert prose-sm max-w-none">
+                                        <ReactMarkdown>{msg.text}</ReactMarkdown>
+                                    </div>
                                 </div>
                             </div>
                         ))}

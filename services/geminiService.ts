@@ -7,10 +7,15 @@ let chat: Chat | null = null;
 
 const getAI = () => {
   if (!ai) {
-    if (!process.env.API_KEY) {
-      throw new Error("API_KEY environment variable not set");
+    // In Vite, environment variables are accessed via import.meta.env
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (!apiKey) {
+      console.error("VITE_GEMINI_API_KEY environment variable not set");
+      // Throwing error might crash the app, better to return null or handle gracefully,
+      // but for now let's keep the logic similar but safe.
+      throw new Error("VITE_GEMINI_API_KEY environment variable not set");
     }
-    ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    ai = new GoogleGenAI({ apiKey });
   }
   return ai;
 };
@@ -37,9 +42,12 @@ export const askAI = async (prompt: string): Promise<string> => {
   try {
     const chatInstance = getChat();
     const response = await chatInstance.sendMessage({ message: prompt });
-    return response.text;
+    // response.text can be a function or a string depending on the SDK version,
+    // but the @google/genai usually returns an object where .text is a getter or property.
+    // If response.text is null/undefined, handle it.
+    return response.text || "I processed that, but have no output.";
   } catch (error) {
     console.error("Error communicating with Gemini API:", error);
-    return "I'm sorry, I'm having trouble connecting to my reasoning circuits. Please try again later.";
+    return "I'm sorry, I'm having trouble connecting to my reasoning circuits. Please check if the API key is configured correctly.";
   }
 };
